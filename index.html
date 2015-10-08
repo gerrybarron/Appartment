@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="favicon.ico"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css"/>
+<script src="jquery/jquery-2.1.4.js"></script>
+<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
+
+	<script>
+		function HomeLogin() {
+			var storedValue1 = JSON.parse(localStorage.getItem('username'))[0];
+			var storedValue2 = JSON.parse(localStorage.getItem('password'))[0];
+			var confirmUser = document.getElementById('name').value;
+			var confirmPass = document.getElementById('password2').value;
+			
+			if(storedValue1 != confirmUser && storedValue2 == confirmPass) {
+				alert("Username or Password is incorrect.");
+			}
+			else if(storedValue1 == confirmUser && storedValue2 != confirmPass) {
+				alert("Username or Password is incorrect.");
+			}
+			else if(storedValue1 == confirmUser && confirmPass == "") {
+				alert("Enter your Password.");
+			}
+			else if(confirmUser == "" && storedValue2 != confirmPass) {
+				alert("Enter your Username.");
+			}
+			else if(confirmUser == "" && confirmPass == "") {
+				alert("Enter Username and Password.");
+			}
+			else if(storedValue1 == confirmUser && storedValue2 == confirmPass) {
+				location.href="#HomePage";
+			}
+		}
+		
+		$.getJSON("users.json",function(data){
+		localStorage.setItem("username", JSON.stringify(data.username));
+		localStorage.setItem("password", JSON.stringify(data.password));
+		});
+		
+		$.mobile.document.on("click","#open-popupArrow1", function( evt ) {
+			$( "#popupArrow1" ).popup( "open", { x: evt.pageX, y: evt.pageY}
+			);
+			evt.preventDefault();
+		});
+	</script>
+	
+		
+</head>
+<style>
+	#pc{
+		font-size: 18px;
+		text-align:center;
+	}
+	#pd{
+		font-size: 80%;
+		text-align: center;
+		font-family: Calibri;
+	}
+	#hdr{
+		font-size: 100%;
+		font-family: Century Gothic;
+	}
+</style>
+<body><!--BODY-->
+<div data-role="page" id="LoginPage" data-theme="a"><!--LOGIN PAGE-->
+	<div data-role="panel" id="rightPannel" data-display="reveal" data-position="right">
+		<form class="userform">
+			<h3>Welcome!</h3>
+				<label for="name">Username:</label>
+					<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+				<label for="password">Password:</label>
+					<input type="password" name="password2" id="password2" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
+					<div class="ui-block-b" onclick="HomeLogin()"><a href="#" class="ui-btn ui-corner-all ui-btn-a ui-mini">Login</a></div>
+				</div>
+		</form>
+	</div>
+	
+	<div data-role="header" data-position="fixed">
+	</div>
+	
+	<div data-role="main" class="ui-content">
+	<br>
+	<br>
+		<p id="pc">
+			<br>
+			<br>
+			<br>
+			<img src="APPARTMENT2.png" align="middle">
+			<br>
+			The best place to feel at home.
+		</p>
+<br>
+<br>
+<br>
+<br>
+		<div data-role="controlgroup" align="center">
+			<a href="#rightPannel" class="ui-btn ui-btn-inline" align="middle">Login</a>
+		</div>
+	</div>
+</div><!--/LOGIN PAGE -->
+
+<div data-role="page" id="HomePage" data-theme="a"><!--HOME PAGE-->
+	<div data-role="header" data-position="fixed" data-theme="a">
+		<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-icon-back ui-btn-icon-notext ui-btn-corner-all" align="right">Logout</a>
+		<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width:400px;">
+				<ul data-role="listview" data-inset="true">
+				<li data-role="list-divider" data-theme="b"><h1>Confirm Logout</h1></li>
+				</ul>
+				<div role="main" class="ui-content ui-responsive">
+					<h3 class="ui-title">Are you sure you want to logout?</h3>
+		
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" data-rel="back">Cancel</a>
+	
+					<a href="#LoginPage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" data-transition="pop">Logout</a>
+				</div>
+		</div>
+		<h6><img src="APPARTMENT2.png" align="middle"></h6>
+		<p id="pd">The best place to feel at home</p>
+		
+		<div data-role="navbar" data-position="fixed">
+			<ul>
+				<li><a href="#" data-icon="home" data-theme="b">Home</a>
+				<li><a href="#PaymentPage" data-transition="none" data-icon="comment" data-theme="b">Notification<span class="ui-li-count">3</span></a>
+			</ul>
+		</div>
+	
+	</div>
+	
+	<div data-role="main" class="ui-content">
+		<div data-role="collapsibleset">
+			<div data-role="collapsible" data-theme="b" data-content-theme="a" data-collapsed-icon="user" data-expanded-icon="user">
+				<h4>Profile</h4>
+				<table data-role="table" data-mode="reflow" class="ui-responsive table-stroke">
+					<thead>
+								<tr>
+									<th data-priority="1">Apartment No:</th>
+									<th data-priority="2">Name:</th>
+									<th data-priority="3">Address:</th>
+									<th data-priority="4">Birthday:</th>
+									<th data-priority="5">Contact No:</th>
+									<th data-priority="6">Companion:</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Gerry O. Barron</td>
+									<td>Castillejoz, Zambales</td>
+									<td>June 12, 1993</td>
+									<td>09098747813</td>
+									<td>5</td>
+								</tr>
+							</tbody>
+				</table>
+				
+			</div>
+			<div data-role="collapsible" data-theme="b" data-content-theme="a" data-collapsed-icon="tag" data-expanded-icon="tag">
+				<h4>Balance</h4>
+					<ul data-role="listview" data-inset="true" data-divider-theme="b">
+						<li data-role="list-divider">Rental</li>
+						<li>P 3,500</li>
+						<li data-role="list-divider">Last Rental Payment</li>
+						<li>P 3,500 June 12, 2015</li>
+					</ul>
+			</div>
+		</div>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h6 id="datetimefooter"></h6>
+		<script>
+		var a= new Date()
+		document.getElementById("datetimefooter").innerHTML = a.toDateString();
+		</script>
+	</div>
+</div><!--/HOME PAGE-->
+
+<div data-role="page" id="PaymentPage" data-theme="a"><!--NOTIFICATION PAGE-->
+	<div data-role="header" data-position="fixed">
+	<a href="#popupDialog2" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-icon-back ui-btn-icon-notext ui-btn-corner-all" align="right">Logout</a>
+		<div data-role="popup" id="popupDialog2" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width:400px;">
+				<ul data-role="listview" data-inset="true">
+				<li data-role="list-divider" data-theme="b"><h1>Confirm Logout</h1></li>
+				</ul>
+				<div role="main" class="ui-content">
+					<h3 class="ui-title">Are you sure you want to logout?</h3>
+		
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" data-rel="back">Cancel</a>
+	
+					<a href="#LoginPage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" data-transition="pop">Logout</a>
+				</div>
+		</div>
+		<h6><img src="APPARTMENT2.png" align="middle"></h6>
+		<p id="pd">The best place to feel at home</p>
+		
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#HomePage" data-transition="none" data-icon="home" data-theme="b">Home</a>
+				<li><a href="#" data-icon="comment" data-theme="b">Notification</a>
+			</ul>
+		</div>
+	</div>
+	
+	<div data-role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true">
+			<li data-role="list-divider" data-theme="b">Sunday, September 27, 2015 <span class="ui-li-count">2</span></li>
+				<li>
+					<a href="#popup1" data-rel="popup" data-position-to="window" data-transition="pop">
+						<h2>Gerry Barron</h2>
+						<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+						<p><strong>You've been invited to a Welcome Part in the City Hall</strong></p>
+						<p style="text-align: left;">Hey Gerry, if you're available at 7pm tomorrow, we've got a party with the other tenants.</p>
+					</a>
+					<div data-role="popup" id="popup1" data-overlay-theme="b" data-theme="b" data-corners="true">
+						<form>
+							<div class="ui-body ui-body-a ui-corner-all" style="padding:10px 20px;">
+								<h2>Gerry Barron</h2>
+								<p class="ui-li-aside"><strong>Sunday, September 27, 2015 6:24</strong> PM</p>
+								<p><strong>You've been invited to a Welcome Part in the City Hall</strong></p>
+								<p style="text-align: left;">Hey Gerry, if you're available at 7pm tomorrow, we've got a party with the other tenants.</p>
+							</div>
+						</form>
+					</div>
+				</li>
+			<li>
+				<a href="#popup2" data-rel="popup" data-position-to="window" data-transition="pop">
+					<h2>The Management</h2>
+					<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+					<p><strong>Boston Conference Planning</strong></p>
+					<p style="text-align: left;">In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+				</a>
+				<div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="true">
+					<form>
+						<div class="ui-body ui-body-a ui-corner-all" style="padding:10px 20px;">
+							<h2>The Management</h2>
+							<p class="ui-li-aside"><strong>Sunday, September 27, 2015 6:24</strong> PM</p>
+							<p><strong>Boston Conference Planning</strong></p>
+							<p style="text-align: left;">In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+						</div>
+					</form>
+				</div>
+			</li>
+		</ul>
+		<ul data-role="listview" data-inset="true">
+			<li data-role="list-divider" data-theme="b">Thursday, October 7, 2015 <span class="ui-li-count">1</span></li>
+			<li>
+				<a href="#popup3" data-rel="popup" data-position-to="window" data-transition="pop">
+						<h2>The Management</h2>
+						<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+						<p><strong>Dinner Tonight</strong></p>
+						<p style="text-align: left;">Hey Gerry, if you're available at 7pm tomorrow, we've got a party with the other tenants.</p>
+				</a>
+				<div data-role="popup" id="popup3" data-overlay-theme="b" data-theme="b" data-corners="true">
+					<form>
+						<div class="ui-body ui-body-a ui-corner-all" style="padding:10px 20px;">
+							<h2>The Management</h2>
+							<p class="ui-li-aside"><strong>Thursday, October 7, 2015 4:48</strong> PM</p>
+							<p><strong>Dinner Tonight</strong></p>
+							<p style="text-align: left;">Let's have a dinner in the convention at 8:00 tonight. Can't wait!</p>
+						</div>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h6 id="datetimefooter2"></h6>
+		<script>
+		var a= new Date()
+		document.getElementById("datetimefooter2").innerHTML = a.toDateString();
+		</script>
+	</div>
+</div><!--/NOTIFICATION PAGE-->
+</body><!--END OF THE BODY-->
+</html>
