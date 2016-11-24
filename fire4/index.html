@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <!--CSS-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="css/materialize.css" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="css/mystyle.css" media="screen,projection" />
+  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  <style type="text/css">
+    #map{
+          height: 100%;
+        }
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+    .hideme{
+      display:none;
+    }
+  </style>
+
+</head>
+<body>
+  <nav class="teal">
+    <div class="container">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo center flow-text">Fire Department Monitoring System</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars fa-2x"></i></a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a href="#" onclick="clearMarkers()">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                About
+              </a>
+            </li>
+          </ul>
+          <ul class="side-nav teal" id="mobile-demo">
+          <h5 class="center">Menu</h5>
+          <div class="container"><div class="divider"></div></div>
+            <li>
+              <a href="#" class="white-text">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" class="white-text">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                About
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <input type="hidden" id="dStart">
+    <input type="hidden" id="dEnd">
+     <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn hideme" href="#modal1" id="trigmode">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4 id="mHead">Modal Header</h4>
+      <p id="panel"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirm</a>
+    </div>
+  </div>
+
+    <div id="map"></div>
+
+  <script type="text/javascript" src="js/init.js"></script>
+  <script src="js/datamap.js"></script>
+  <script type="text/javascript" src="js/materialize.js"></script>
+  
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAOSrVBmfLfJNg2hdGZ14PCaMSRt5jAqn4&callback=initMap" async defer></script>
+</body>
+</html>
